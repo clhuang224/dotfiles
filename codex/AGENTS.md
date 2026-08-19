@@ -1,6 +1,6 @@
-# Global Claude Code preferences
+# Global Codex CLI preferences
 
-These apply across all projects for this user, regardless of repo-local `CLAUDE.md` files (which add project-specific rules on top, they don't replace these).
+These apply across all projects for this user, regardless of repo-local `AGENTS.md` files (which add project-specific rules on top, they don't replace these).
 
 ## Commits
 
@@ -10,7 +10,7 @@ These apply across all projects for this user, regardless of repo-local `CLAUDE.
 - Every commit message MUST end with this exact trailer line:
 
   ```
-  Co-authored-by: Claude Code [model] ([context size]) <noreply@anthropic.com>
+  Co-authored-by: Codex [model] ([context size]) <noreply@openai.com>
   ```
 
 ## TypeScript
