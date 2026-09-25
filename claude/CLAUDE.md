@@ -21,6 +21,8 @@ These apply across all projects for this user, regardless of repo-local `CLAUDE.
   Co-authored-by: Claude Code [model] ([context size]) <noreply@anthropic.com>
   ```
 
+  If you're not sure of the context size, omit it along with its parentheses (`Co-authored-by: Claude Code [model] <noreply@anthropic.com>`). If you're not sure of the model, **ask the user before committing** — don't guess.
+
 ## TypeScript
 
 - Enable **strict mode** (`"strict": true` in `tsconfig.json`) on new TypeScript projects. Don't relax it for convenience.

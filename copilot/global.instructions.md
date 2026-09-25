@@ -27,6 +27,8 @@ These apply across all projects for this user, regardless of repo-local `.github
   Co-authored-by: GitHub Copilot [model] ([context size]) <copilot@github.com>
   ```
 
+  If you're not sure of the context size, omit it along with its parentheses (`Co-authored-by: GitHub Copilot [model] <copilot@github.com>`). If you're not sure of the model, **ask the user before committing** — don't guess.
+
 ## TypeScript
 
 - Enable **strict mode** (`"strict": true` in `tsconfig.json`) on new TypeScript projects. Don't relax it for convenience.
