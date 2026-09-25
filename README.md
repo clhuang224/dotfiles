@@ -21,7 +21,7 @@ The three files share the same ruleset; only tool-specific formatting (e.g. fron
 **Windows (PowerShell, run as the user — may need Developer Mode enabled for symlinks without admin):**
 
 ```powershell
-New-Item -ItemType SymbolicLink -Path "$HOME\.claude\CLAUDE.md" -Target "D:\claude\dotfiles\claude\CLAUDE.md" -Force
+New-Item -ItemType SymbolicLink -Path "$HOME\.claude\CLAUDE.md" -Target "C:\path\to\dotfiles\claude\CLAUDE.md" -Force
 ```
 
 **macOS / Linux:**
@@ -39,7 +39,7 @@ After cloning this repo on a new machine, run the appropriate command above once
 **Windows (PowerShell, run as the user — may need Developer Mode enabled for symlinks without admin):**
 
 ```powershell
-New-Item -ItemType SymbolicLink -Path "$HOME\.codex\AGENTS.md" -Target "D:\claude\dotfiles\codex\AGENTS.md" -Force
+New-Item -ItemType SymbolicLink -Path "$HOME\.codex\AGENTS.md" -Target "C:\path\to\dotfiles\codex\AGENTS.md" -Force
 ```
 
 **macOS / Linux:**
@@ -55,7 +55,7 @@ ln -sf "$(pwd)/codex/AGENTS.md" ~/.codex/AGENTS.md
 **Windows (PowerShell, run as the user — may need Developer Mode enabled for symlinks without admin):**
 
 ```powershell
-New-Item -ItemType SymbolicLink -Path "$HOME\.copilot\instructions\global.instructions.md" -Target "D:\claude\dotfiles\copilot\global.instructions.md" -Force
+New-Item -ItemType SymbolicLink -Path "$HOME\.copilot\instructions\global.instructions.md" -Target "C:\path\to\dotfiles\copilot\global.instructions.md" -Force
 ```
 
 **macOS / Linux:**
