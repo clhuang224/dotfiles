@@ -13,6 +13,7 @@ These apply across all projects for this user, regardless of repo-local `.github
 - Write commit messages and code comments in **English**.
 - Use **Conventional Commits** format (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, etc.).
 - Keep commits **small and atomic** — one logical change per commit. Don't batch unrelated changes into a single commit.
+- When a commit fixes a security alert (e.g. a Dependabot or code scanning alert), the commit message MUST reference the related **GHSA ID** (e.g. `GHSA-xxxx-xxxx-xxxx`). If the GHSA ID is missing or unknown, **ask the user for it before committing** — don't commit without it or make one up.
 - Every commit message MUST end with this exact trailer line:
 
   ```
