@@ -23,6 +23,11 @@ These apply across all projects for this user, regardless of repo-local `CLAUDE.
 
   If you're not sure of the context size, omit it along with its parentheses (`Co-authored-by: Claude Code [model] <noreply@anthropic.com>`). If you're not sure of the model, **ask the user before committing** — don't guess.
 
+## Git
+
+- **Ask before** any hard-to-reverse Git operation: `git push` (especially `--force`), amending or rebasing commits that are already pushed, `git reset --hard`, discarding uncommitted changes, or deleting branches.
+- Never skip Git hooks (`--no-verify`) unless the user explicitly asks.
+
 ## TypeScript
 
 - Enable **strict mode** (`"strict": true` in `tsconfig.json`) on new TypeScript projects. Don't relax it for convenience.
