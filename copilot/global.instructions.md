@@ -38,6 +38,7 @@ These apply across all projects for this user, regardless of repo-local `.github
 
 - Enable **strict mode** (`"strict": true` in `tsconfig.json`) on new TypeScript projects. Don't relax it for convenience.
 - When a type is a union of a few string literals, keep the literal values in **English**. If there's a corresponding Chinese display label, handle it through a separate map/lookup (e.g. `Record<Status, string>`) instead of using Chinese text as the literal values themselves.
+- Don't use `any`; use `unknown` and narrow it, or write a proper type. If `@ts-ignore` / `@ts-expect-error` is truly needed, add a comment explaining why (prefer `@ts-expect-error`).
 
 ## Testing
 
