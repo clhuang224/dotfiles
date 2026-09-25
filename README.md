@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal config synced across machines via this repo.
+Dotfiles for syncing my coding-agent preferences (Claude Code, Codex CLI, GitHub Copilot CLI) across machines and tools. Each tool's global instructions file lives here and is symlinked into place, so one set of rules applies everywhere.
 
 ## Overview
 
