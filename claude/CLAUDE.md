@@ -2,9 +2,16 @@
 
 These apply across all projects for this user, regardless of repo-local `CLAUDE.md` files (which add project-specific rules on top, they don't replace these).
 
+## Language
+
+- Use **English** for everything written into a repo: commit messages, PR descriptions, code comments, README, agent instruction files (`AGENTS.md`, `CLAUDE.md`, etc.), and other project docs.
+- Use **Traditional Chinese (zh-TW)** only for:
+  - Talking to the user (chat replies, questions, summaries).
+  - Docs that explicitly target Chinese readers, e.g. `README-zhTW.md`.
+- When writing Chinese, follow the [Chinese Copywriting Guidelines](https://github.com/sparanoid/chinese-copywriting-guidelines) — in particular, put a space between Chinese and English words or numbers (盤古之白), e.g. `在 GitHub 上建立 3 個 issue`.
+
 ## Commits
 
-- Write commit messages and code comments in **English**.
 - Use **Conventional Commits** format (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, etc.).
 - Keep commits **small and atomic** — one logical change per commit. Don't batch unrelated changes into a single commit.
 - When a commit fixes a security alert (e.g. a Dependabot or code scanning alert), the commit message MUST reference the related **GHSA ID** (e.g. `GHSA-xxxx-xxxx-xxxx`). If the GHSA ID is missing or unknown, **ask the user for it before committing** — don't commit without it or make one up.

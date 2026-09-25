@@ -4,7 +4,7 @@ Personal config synced across machines via this repo.
 
 ## Overview
 
-Global coding-agent preferences (commit conventions, TypeScript rules, testing, Angular) are kept in one file per tool, each symlinked into the location that tool reads:
+Global coding-agent preferences (language, commit conventions, TypeScript rules, testing, Angular) are kept in one file per tool, each symlinked into the location that tool reads:
 
 | Tool             | Source file                       | Symlinked to                                       |
 | ----------------- | ---------------------------------- | --------------------------------------------------- |
