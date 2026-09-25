@@ -4,7 +4,7 @@ Dotfiles for syncing my coding-agent preferences (Claude Code, Codex CLI, GitHub
 
 ## Overview
 
-Global coding-agent preferences (language, commit conventions, TypeScript rules, testing, Angular) are kept in one file per tool, each symlinked into the location that tool reads:
+Global coding-agent preferences (language, commit conventions, Git safety, TypeScript rules, testing, Angular) are kept in one file per tool, each symlinked into the location that tool reads:
 
 | Tool             | Source file                       | Symlinked to                                       |
 | ----------------- | ---------------------------------- | --------------------------------------------------- |
