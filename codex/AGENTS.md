@@ -28,6 +28,7 @@ These apply across all projects for this user, regardless of repo-local `AGENTS.
 ## Git
 
 - **Ask before** any hard-to-reverse Git operation: `git push` (especially `--force`), amending or rebasing commits that are already pushed, `git reset --hard`, discarding uncommitted changes, or deleting branches.
+- Ask **separately for every push**, including tag pushes. Approval for one push does not carry over to later pushes in the same session; list what would be pushed and wait for a yes each time.
 - Never skip Git hooks (`--no-verify`) unless the user explicitly asks.
 
 ## Secrets
