@@ -19,6 +19,7 @@ These apply across all projects for this user, regardless of repo-local `.github
 ## Commits
 
 - Use **Conventional Commits** format (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`, etc.).
+- Every commit message MUST include a **body** after the subject line, separated by a blank line. Explain **why** the change was made and any context a reviewer needs (the problem, notable decisions, trade-offs, follow-ups) — don't just restate the diff. Wrap body lines at about 72 characters. The trailer below goes after the body, separated by another blank line.
 - Keep commits **small and atomic** — one logical change per commit. Don't batch unrelated changes into a single commit.
 - Keep changes **scoped to the task**. Don't refactor, rename, reformat, or "clean up" unrelated code along the way; if something else looks worth changing, mention it instead.
 - When a commit fixes a security alert (e.g. a Dependabot or code scanning alert), the commit message MUST reference the related **GHSA ID** (e.g. `GHSA-xxxx-xxxx-xxxx`). If the GHSA ID is missing or unknown, **ask the user for it before committing** — don't commit without it or make one up.
