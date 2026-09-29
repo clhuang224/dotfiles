@@ -29,6 +29,10 @@ These apply across all projects for this user, regardless of repo-local `CLAUDE.
 - **Ask before** any hard-to-reverse Git operation: `git push` (especially `--force`), amending or rebasing commits that are already pushed, `git reset --hard`, discarding uncommitted changes, or deleting branches.
 - Never skip Git hooks (`--no-verify`) unless the user explicitly asks.
 
+## Secrets
+
+- **Never read `~/.npmrc`** in any way (`cat`, `grep`, file-read tools, filtered or partial output). It holds registry auth tokens, and filtering the output is not a safe substitute for not reading it. If a task depends on registry configuration, ask the user instead.
+
 ## TypeScript
 
 - Enable **strict mode** (`"strict": true` in `tsconfig.json`) on new TypeScript projects. Don't relax it for convenience.
