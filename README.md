@@ -62,7 +62,7 @@ New-Item -ItemType SymbolicLink -Path "$HOME\.claude\skills\team" -Target "C:\pa
 New-Item -ItemType SymbolicLink -Path "$HOME\.claude\agents" -Target "C:\path\to\dotfiles\claude\agents" -Force
 ```
 
-Restart Claude Code after creating `~/.claude/agents` for the first time; it is only picked up at startup when it did not exist before.
+If the agents do not show up after creating `~/.claude/agents` for the first time, restart Claude Code.
 
 ## Codex CLI global config
 
