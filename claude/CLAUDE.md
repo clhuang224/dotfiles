@@ -9,6 +9,7 @@ These apply across all projects for this user, regardless of repo-local `CLAUDE.
   - Talking to the user (chat replies, questions, summaries).
   - Docs that explicitly target Chinese readers, e.g. `README-zhTW.md`.
 - When writing Chinese, follow the [Chinese Copywriting Guidelines](https://github.com/sparanoid/chinese-copywriting-guidelines) — in particular, put a space between Chinese and English words or numbers (盤古之白), e.g. `在 GitHub 上建立 3 個 issue`.
+- Never quote the user verbatim in anything written into a repo (docs, specs, code comments, commit messages). Record the decision and its reason in your own words.
 
 ## Commits
 
