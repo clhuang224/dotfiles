@@ -17,7 +17,17 @@ These apply across all projects for this user, regardless of repo-local `AGENTS.
 - Every commit message MUST include a **body** after the subject line, separated by a blank line. Write it for a reader who only has the repository: optionally one short sentence on **why** (the problem or constraint), then a **bullet list** (`- `) of **what** the commit does, described at the level of behavior rather than restating the diff. Usually 2–5 bullets; a trivial commit may have one. Leave out the process and conversation behind the change (who asked, reviews, discussions, an agent's own mistakes), working rules, and names of other private projects. Wrap lines at about 72 characters. The trailer below goes after the body, separated by another blank line.
 - Keep commits **small and atomic** — one logical change per commit. Don't batch unrelated changes into a single commit.
 - Keep changes **scoped to the task**. Don't refactor, rename, reformat, or "clean up" unrelated code along the way; if something else looks worth changing, mention it instead.
-- When a commit fixes a security alert (e.g. a Dependabot or code scanning alert), the commit message MUST reference the related **GHSA ID** (e.g. `GHSA-xxxx-xxxx-xxxx`). If the GHSA ID is missing or unknown, **ask the user for it before committing** — don't commit without it or make one up.
+- When a commit fixes a security alert (e.g. a Dependabot or code scanning alert), the commit message MUST reference the related **GHSA ID** in a `Refs:` footer line, placed in the footer block directly above the `Co-authored-by` trailer (no blank line between them). Use one line per ID: list every advisory the commit fixes, and add the **CVE ID** as well when the advisory has one. If the GHSA ID is missing or unknown, **ask the user for it before committing** — don't commit without it or make one up. For example:
+
+  ```
+  fix(deps): bump vite to 8.3.2
+
+  - Pick up the fix for a dev server path traversal
+
+  Refs: GHSA-xxxx-xxxx-xxxx
+  Refs: CVE-YYYY-NNNNN
+  Co-authored-by: ...
+  ```
 - Every commit message MUST end with this exact trailer line:
 
   ```
