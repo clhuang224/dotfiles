@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "\"$HOME/.copilot/hooks/guard-commands.sh\"",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}
