@@ -1,28 +1,15 @@
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
-language: zh-TW
+inheritance: true
 tone_instructions: >-
   Write each comment in Traditional Chinese, then repeat it in English below.
-  Judge changes against the whole repository and README.md, not only the
-  diff.
+  These files configure coding agents on the maintainer's machines; review
+  each change for what it makes the agents do differently.
 reviews:
-  profile: assertive
-  request_changes_workflow: false
-  high_level_summary: true
-  poem: false
-  review_status: true
-  collapse_walkthrough: true
-  auto_review:
-    enabled: true
-    drafts: false
   path_instructions:
-    - path: '**/*'
+    - path: 'README.md'
       instructions: |
-        These files configure coding agents on the maintainer's machines.
-        Review each change for what it makes the agents do differently.
-        - Docs and agent instructions are in English.
-        - Commits follow Conventional Commits with a body.
-        - README.md must describe every file that gets symlinked and the
-          command that links it.
+        README.md must describe every file that gets symlinked and the
+        command that links it.
     - path: '{claude/CLAUDE.md,codex/AGENTS.md,copilot/global.instructions.md}'
       instructions: |
         The three instruction files share one ruleset. A rule added,
@@ -40,13 +27,6 @@ reviews:
         - The Copilot hook must output valid JSON and never let a blocked
           command through when its input is malformed.
         - The README's list of rules and known limits must stay accurate.
-  tools:
-    languagetool:
-      enabled: false
-chat:
-  auto_reply: true
 knowledge_base:
   code_guidelines:
     enabled: false
-  learnings:
-    scope: auto
