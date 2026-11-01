@@ -5,9 +5,15 @@ prefix_rule(
 )
 
 prefix_rule(
-    pattern=["git", "push", ["--force", "-f", "--force-with-lease", "--no-verify"]],
+    pattern=["git", "push", ["--force", "-f", "-uf", "-fu", "--force-with-lease", "--no-verify"]],
     decision="forbidden",
     justification="Force pushes and skipped hooks are blocked. Ask the user to run it.",
+)
+
+prefix_rule(
+    pattern=["git", "-C"],
+    decision="prompt",
+    justification="Prefix rules cannot see the subcommand after -C, so every git -C command needs the user's approval.",
 )
 
 prefix_rule(
@@ -41,13 +47,19 @@ prefix_rule(
 )
 
 prefix_rule(
-    pattern=["gh", "api", ["-X", "--method", "-f", "-F", "--field", "--raw-field", "--input"]],
+    pattern=["gh", "api"],
     decision="prompt",
-    justification="GitHub API writes need the user's approval.",
+    justification="Prefix rules cannot tell GitHub API reads from writes, so every call needs the user's approval.",
 )
 
 prefix_rule(
     pattern=["gh", "auth", "token"],
     decision="forbidden",
     justification="The GitHub token must not be printed.",
+)
+
+prefix_rule(
+    pattern=[["cat", "head", "tail", "less", "more"], ["~/.npmrc", "$HOME/.npmrc"]],
+    decision="forbidden",
+    justification="~/.npmrc holds registry tokens and must not be read.",
 )
