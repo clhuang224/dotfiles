@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Emit the permission decision and reason as JSON, then exit the hook successfully.
 decide() {
   printf '{"permissionDecision":"%s","permissionDecisionReason":"%s"}\n' "$1" "$2"
   exit 0
@@ -23,6 +24,8 @@ command="$(jq -r '
 
 command="$(perl -0pe 's/\\\n/ /g; s/\n/;/g; s/[ \t]+/ /g' <<<"$command")"
 
+# Match an extended regular expression against the normalized command.
+# Return grep's status: 0 for a match, 1 for no match, or 2 on error.
 matches() { grep -Eq -- "$1" <<<"$command"; }
 
 end='( |$|[;&|)])'
