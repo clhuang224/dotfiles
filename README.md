@@ -14,6 +14,8 @@ Global coding-agent preferences (language, writing, commit conventions, Git safe
 
 The three files share the same ruleset; only tool-specific formatting (e.g. frontmatter) and the commit trailer's tool name differ. When adding or changing a rule, update all three.
 
+The instructions ask each agent to stay away from risky Git and GitHub commands. [Command guardrails](#command-guardrails) enforce the most important of those rules in each tool's own permission system, so they hold even when an agent ignores its instructions.
+
 Claude Code also gets an on-demand team mode (see [Claude Code team mode](#claude-code-team-mode)). It has no Codex or Copilot counterpart, so it is the one exception to updating all three.
 
 ## Claude Code global config
@@ -98,3 +100,52 @@ ln -sf "$(pwd)/copilot/global.instructions.md" ~/.copilot/instructions/global.in
 ```
 
 Note: this only covers Copilot **CLI**. GitHub Copilot Chat in VS Code doesn't yet support a single global instructions file the same way — for a given project you'd still add a repo-local `.github/copilot-instructions.md`, or sync personal instructions across machines via VS Code's Settings Sync ("Prompts and Instructions").
+
+## Command guardrails
+
+Each agent gets the same command rules, written in the format its tool understands:
+
+| Tool | Source | Symlinked to | Mechanism |
+| --- | --- | --- | --- |
+| Claude Code | `claude/settings.json` | `~/.claude/settings.json` | `permissions.ask` and `permissions.deny` rules |
+| Codex CLI | `codex/rules/guard.rules` | `~/.codex/rules/guard.rules` | `prefix_rule` with `prompt` and `forbidden` |
+| GitHub Copilot CLI | `copilot/hooks/guard.json`, `copilot/hooks/guard-commands.sh` | `~/.copilot/hooks/guard.json`, `~/.copilot/hooks/guard-commands.sh` | A `preToolUse` hook script that returns `ask` or `deny` |
+
+**Ask every time:**
+
+- `git push`
+- `gh pr merge`
+- `git reset --hard`
+- `git branch -D`
+
+**Blocked:**
+
+- Force pushes (`--force`, `-f`, `--force-with-lease`, `+refspec`)
+- Skipping Git hooks with `--no-verify`, or `-n` on `git commit`
+- Changing the repository on GitHub: `gh repo edit`, `delete`, `archive`, and `rename`, plus `gh api` calls on rulesets or branch protection
+- Printing the GitHub token with `gh auth token`
+- Reading `~/.npmrc`. Claude Code covers its file tools and shell commands, Codex CLI covers `cat`, `head`, `tail`, `less`, and `more` with the path right after them, and the Copilot hook covers shell commands only, not Copilot's own file tools
+- Claude Code only: editing these guardrail files, so an agent cannot lift its own limits
+
+These rules match command text, so a command written another way (a script, an alias, a different argument order) can slip past them. Branch protection on GitHub is the real boundary; these rules only catch the common forms early. Tool-specific limits:
+
+- **Codex CLI** matches prefixes only, so a flag is seen only right after its subcommand: `git push origin main --force` and `git commit -m wip --no-verify` are not blocked. Every push still asks first, which covers the push case. For the same reason it asks before every `git -C` command, harmless ones included, and before every `gh api` call, reads included, since it cannot see the subcommand after `-C` or tell API reads from writes.
+- **GitHub Copilot CLI** has no persistent deny setting, so the hook does the checking. It needs `jq`; without it, every shell command is denied, and so is a tool call it cannot read. A hook that times out lets the command run.
+- **Claude Code** wildcards cannot match a combined short flag such as `git push -uf`; every push still asks first, which covers it.
+- **Claude Code** may rewrite `~/.claude/settings.json` when a setting changes in the app, which can replace the symlink with a plain file. Check the link after changing settings.
+- The Claude Code `Edit` rules name `~/Documents/repo/dotfiles`. Update those paths if this repo lives somewhere else.
+
+**macOS / Linux:**
+
+`ln -sf` replaces an existing `~/.claude/settings.json`, so back it up first if it holds settings you want to keep. If `~/.copilot/hooks` is a symlink from an older setup, remove it before linking the files.
+
+```bash
+ln -sf "$(pwd)/claude/settings.json" ~/.claude/settings.json
+mkdir -p ~/.codex/rules
+ln -sf "$(pwd)/codex/rules/guard.rules" ~/.codex/rules/guard.rules
+mkdir -p ~/.copilot/hooks
+ln -sf "$(pwd)/copilot/hooks/guard.json" ~/.copilot/hooks/guard.json
+ln -sf "$(pwd)/copilot/hooks/guard-commands.sh" ~/.copilot/hooks/guard-commands.sh
+```
+
+The Copilot hook is a Bash script, so these guardrails are not set up for Windows yet.
