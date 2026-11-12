@@ -137,7 +137,7 @@ These rules match command text, so a command written another way (a script, an a
 
 **macOS / Linux:**
 
-`ln -sf` replaces an existing `~/.claude/settings.json`, so back it up first if it holds settings you want to keep. If `~/.copilot/hooks` is a symlink from an older setup, remove it before linking the files.
+`ln -sf` replaces existing files at these paths, including `~/.claude/settings.json` and the two Copilot hook files, so back them up first if they hold settings you want to keep. If `~/.copilot/hooks` is a symlink from an older setup, remove it before linking the files.
 
 ```bash
 ln -sf "$(pwd)/claude/settings.json" ~/.claude/settings.json
