@@ -50,11 +50,11 @@ These apply across all projects for this user, regardless of repo-local `CLAUDE.
 
 Keep total token use low, counting tool output and retries, but never at the cost of correctness.
 
-- **Read:** find code with `rg` and read only the lines you need. Don't reread files or print whole files.
+- **Read:** find code with `rg` and read only the lines you need. Don't reread files or print whole files. Skip lockfiles, build output, and generated files; `rg` them for the lines you need.
 - **Edit:** use the patch or edit tool (e.g. `apply_patch`) for small changes, Perl for simple bulk replacements, and Python for complex or structured edits. Don't write one-off Rust programs.
 - **Verify:** use `git diff`, `git diff --check`, and the relevant tests instead of rereading files.
-- **Output:** limit tool output to the results and errors that matter; skip long logs.
-- **Execute:** do simple tasks directly, without extra planning, repeated steps, or unneeded tool calls.
+- **Output:** limit tool output to the results and errors that matter. Use compact forms such as `git log --oneline`, `gh --json --jq`, and quiet flags, and read only the failed steps of CI logs.
+- **Execute:** do simple tasks directly, without extra planning, repeated steps, or unneeded tool calls. Send independent tool calls together, and run the narrowest tests first and the full suite once at the end.
 - **Reply:** briefly say what changed and how it was verified, without repeating what is already known.
 - Prefer methods that are likely to succeed and cheap to retry. Never skip a needed check to save tokens.
 
