@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+inheritance: true
+tone_instructions: >-
+  Write each comment in Traditional Chinese, then repeat it in English below.
+  These files configure coding agents on the maintainer's machines; review
+  each change for what it makes the agents do differently.
+reviews:
+  path_instructions:
+    - path: 'README.md'
+      instructions: |
+        README.md must describe every file that gets symlinked and the
+        command that links it.
+    - path: '{claude/CLAUDE.md,codex/AGENTS.md,copilot/global.instructions.md}'
+      instructions: |
+        The three instruction files share one ruleset. A rule added,
+        changed, or removed in one must change the same way in the other
+        two; only tool-specific formatting and the commit trailer's tool
+        name may differ. The team mode under claude/ is the one
+        Claude-only exception.
+    - path: '{claude/settings.json,codex/rules/**,copilot/hooks/**}'
+      instructions: |
+        These are command guardrails. All three tools must ask before and
+        block the same set of commands listed in README.md.
+        - Look for common ways around each rule: flags in another
+          position, `git -C`, compound commands, wrappers, and quoting.
+        - Flag patterns that also catch harmless commands.
+        - The Copilot hook must output valid JSON and never let a blocked
+          command through when its input is malformed.
+        - The README's list of rules and known limits must stay accurate.
+knowledge_base:
+  code_guidelines:
+    enabled: false

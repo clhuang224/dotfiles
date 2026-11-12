@@ -1,0 +1,65 @@
+prefix_rule(
+    pattern=["git", "push"],
+    decision="prompt",
+    justification="Every push needs the user's approval.",
+)
+
+prefix_rule(
+    pattern=["git", "push", ["--force", "-f", "-uf", "-fu", "--force-with-lease", "--no-verify"]],
+    decision="forbidden",
+    justification="Force pushes and skipped hooks are blocked. Ask the user to run it.",
+)
+
+prefix_rule(
+    pattern=["git", ["-C", "-c"]],
+    decision="prompt",
+    justification="Prefix rules cannot see the subcommand after -C or -c, so every such git command needs the user's approval.",
+)
+
+prefix_rule(
+    pattern=["git", "commit", ["--no-verify", "-n"]],
+    decision="forbidden",
+    justification="Git hooks must run. Fix what the hook reports instead.",
+)
+
+prefix_rule(
+    pattern=["git", "reset", "--hard"],
+    decision="prompt",
+    justification="Discarding work needs the user's approval.",
+)
+
+prefix_rule(
+    pattern=["git", "branch", "-D"],
+    decision="prompt",
+    justification="Deleting a branch needs the user's approval.",
+)
+
+prefix_rule(
+    pattern=["gh", "pr", "merge"],
+    decision="prompt",
+    justification="Merging a pull request needs the user's approval.",
+)
+
+prefix_rule(
+    pattern=["gh", "repo", ["edit", "delete", "archive", "rename"]],
+    decision="forbidden",
+    justification="Repository settings are changed by the user on GitHub.",
+)
+
+prefix_rule(
+    pattern=["gh", "api"],
+    decision="prompt",
+    justification="Prefix rules cannot tell GitHub API reads from writes, so every call needs the user's approval.",
+)
+
+prefix_rule(
+    pattern=["gh", "auth", "token"],
+    decision="forbidden",
+    justification="The GitHub token must not be printed.",
+)
+
+prefix_rule(
+    pattern=[["cat", "head", "tail", "less", "more"], ["~/.npmrc", "$HOME/.npmrc"]],
+    decision="forbidden",
+    justification="~/.npmrc holds registry tokens and must not be read.",
+)

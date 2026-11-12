@@ -1,0 +1,50 @@
+{
+  "theme": "auto",
+  "permissions": {
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git -C * push *)",
+      "Bash(gh pr merge *)",
+      "Bash(git reset --hard *)",
+      "Bash(git branch -D *)"
+    ],
+    "deny": [
+      "Bash(git push *--force*)",
+      "Bash(git push -f *)",
+      "Bash(git push * -f)",
+      "Bash(git push * -f *)",
+      "Bash(git push * +*)",
+      "Bash(git push +*)",
+      "Bash(git -C * push *--force*)",
+      "Bash(git -C * push -f *)",
+      "Bash(git -C * push * -f)",
+      "Bash(git -C * push * -f *)",
+      "Bash(git -C * push * +*)",
+      "Bash(git -C * push +*)",
+      "Bash(*--no-verify*)",
+      "Bash(git commit -n *)",
+      "Bash(git commit * -n)",
+      "Bash(git commit * -n *)",
+      "Bash(git -C * commit -n *)",
+      "Bash(git -C * commit * -n)",
+      "Bash(git -C * commit * -n *)",
+      "Bash(gh repo edit *)",
+      "Bash(gh repo delete *)",
+      "Bash(gh repo archive *)",
+      "Bash(gh repo rename *)",
+      "Bash(gh api *rulesets*)",
+      "Bash(gh api *protection*)",
+      "Bash(gh auth token *)",
+      "Read(~/.npmrc)",
+      "Bash(*~/.npmrc*)",
+      "Bash(*$HOME/.npmrc*)",
+      "Bash(*${HOME}/.npmrc*)",
+      "Edit(~/.claude/settings.json)",
+      "Edit(~/.codex/rules/**)",
+      "Edit(~/.copilot/hooks/**)",
+      "Edit(~/Documents/repo/dotfiles/claude/settings.json)",
+      "Edit(~/Documents/repo/dotfiles/codex/rules/**)",
+      "Edit(~/Documents/repo/dotfiles/copilot/hooks/**)"
+    ]
+  }
+}
