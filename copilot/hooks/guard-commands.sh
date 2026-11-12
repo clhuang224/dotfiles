@@ -26,6 +26,8 @@ command="$(jq -r '
 command="$(perl -0pe 's/\\\n/ /g; s/\n/;/g; s/[ \t]+/ /g' <<<"$command")"
 
 matches() { grep -Eq -- "$1" <<<"$command"; }
+unquoted="${command//[\"\']/}"
+matches_unquoted() { grep -Eq -- "$1" <<<"$unquoted"; }
 
 end='( |$|[;&|)])'
 args='( [^;&|]*)?'
@@ -40,23 +42,23 @@ if matches "${git}[a-z-]+${args} --no-verify${end}" ||
   matches "${git}commit${args} -[A-Za-z]*n[A-Za-z]*${end}"; then
   decide deny "Git hooks must run. Fix what the hook reports instead."
 fi
-if matches "gh repo (edit|delete|archive|rename)${end}"; then
+if matches_unquoted "gh repo (edit|delete|archive|rename)${end}"; then
   decide deny "Repository settings are changed by the user on GitHub."
 fi
-if matches 'gh api [^;&|]*(rulesets|/protection)'; then
+if matches_unquoted 'gh api [^;&|]*(rulesets|/protection)'; then
   decide deny "Branch protection is changed by the user on GitHub."
 fi
-if matches "gh auth token${end}"; then
+if matches_unquoted "gh auth token${end}"; then
   decide deny "The GitHub token must not be printed."
 fi
-if matches "${home}/\.npmrc"; then
+if matches_unquoted "${home}/\.npmrc"; then
   decide deny "~/.npmrc holds registry tokens and must not be read."
 fi
 
 if matches "${git}push${end}"; then
   decide ask "Every push needs the user's approval."
 fi
-if matches "gh pr merge${end}"; then
+if matches_unquoted "gh pr merge${end}"; then
   decide ask "Merging a pull request needs the user's approval."
 fi
 if matches "${git}reset${args} --hard${end}"; then
