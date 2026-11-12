@@ -11,7 +11,9 @@ command -v jq >/dev/null || decide deny "Install jq so the command guard can run
 input="$(cat)"
 jq -e 'type == "object"' >/dev/null 2>&1 <<<"$input" ||
   decide deny "The command guard could not read the tool call."
-[[ "$(jq -r '.toolName // empty' <<<"$input")" == "bash" ]] || exit 0
+tool="$(jq -r '.toolName // empty' <<<"$input")"
+[[ -n "$tool" ]] || decide deny "The command guard could not read the tool name."
+[[ "$tool" == "bash" ]] || exit 0
 
 command="$(jq -r '
   .toolArgs
