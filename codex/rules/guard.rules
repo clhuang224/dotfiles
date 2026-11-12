@@ -11,9 +11,9 @@ prefix_rule(
 )
 
 prefix_rule(
-    pattern=["git", "-C"],
+    pattern=["git", ["-C", "-c"]],
     decision="prompt",
-    justification="Prefix rules cannot see the subcommand after -C, so every git -C command needs the user's approval.",
+    justification="Prefix rules cannot see the subcommand after -C or -c, so every such git command needs the user's approval.",
 )
 
 prefix_rule(
